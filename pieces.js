@@ -1,87 +1,57 @@
 let squareP;
-class Point
-{	constructor(x, y)
-	{	this.x = x;
-		this.y = y;
-        this.angle = 0;
-	}
-	translate(dx, dy)
-	{	this.x += dx;
-		this.y += dy;
-	}
-	rotate(angle)
-	{	this.angle += angle;
-        angle *= Math.PI/180;
-		let x = Math.cos(angle)*this.x-Math.sin(angle)*this.y;
-		let y = Math.sin(angle)*this.x+Math.cos(angle)*this.y;
-		this.x = x;
-		this.y = y;
-	}
+class Square{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.size = squareP;
+    }
+    draw(color)
+    {   context.fillStyle = color;
+        context.fillRect(this.x, this.y, this.size, this.size);
+    }
+    translate(dx, dy)     
+    {   if(dy != 0)
+        {   //maracutaia braba que altera o true na matriz
+            let pos = 21-this.y/squareP;
+            console.log(pos)
+        }
+        this.x = Math.round((this.x+dx)*1000)/1000;
+        this.y = Math.round((this.y+dy)*1000)/1000;
+    }
 }
 
-
-class Piece
-{   constructor(type)
-    {   this.x = squareP*Math.trunc(Math.random()*19);
+class Piece{
+    constructor(type)
+    {   this.x = Math.round(squareP*9000)/1000;
         this.y = 0;
-        this.timer = 0;
-        this.state = true;
-        this.angle = 0;
         switch(type)
         {   case 0:
-                this.width = squareP*2;
-                this.height = squareP*2;
-                this.list = [new Point(this.x, this.y), new Point(this.x+this.width, this.y), new Point(this.x+this.width, this.y+this.height), new Point(this.x, this.y+this.height)];
+                this.squares = [new Square(this.x, this.y), new Square(this.x+squareP, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
                 this.color = "yellow";
-                this.mass = 4;
+                this.width = squareP*2;
+                grid[grid.length-1][9] = grid[grid.length-1][10] = grid[grid.length-2][9] = grid[grid.length-2][10] = 1;
+            break;
+            case 1:
+
+            break;
+            case 2:
+
+            break;
+            case 3:
+
             break;
         }
     }
-    translate(dx, dy)
-    {   for(let i = 0; (i < this.list.length); i++)
-        {   this.list[i].translate(dx, dy);
-        }
-        this.x+=dx;
-        this.y+=dy;
-    }
-    update()
-    {   if(!this.state)
-        {   this.timer++;
-            if(this.timer == 30)
-            {   this.translate(0, squareP);
-                this.timer = 0;
-            }
-        }
-        if(this.angle != balance.angle)
-        {   this.rotate(balance.angle-this.angle);
-            this.angle = balance.angle;
-        }
-    }
     draw()
-    {   context.fillStyle = this.color;
-        context.beginPath();
-        context.moveTo(this.list[0].x, this.list[0].y);
-        for(let i = 0; (i < this.list.length); i++)
-        {   context.lineTo(this.list[i].x, this.list[i].y);
+    {   for(let i = 0; (i < this.squares.length); i++)
+        {   this.squares[i].draw(this.color);   
         }
-        context.closePath();
-        context.fill();
     }
-    rotate(angle)
-    {   let center = {x: this.x+this.width/2, y: this.y+this.height/2};
-        this.translate(-center.x, -center.y);
-        for(let i = 0; (i < this.list.length); i++)
-        {   this.list[i].rotate(angle);
+    translate(dx, dy)     
+    {   this.x = Math.round((this.x+dx)*1000)/1000;
+        this.y = Math.round((this.y+dy)*1000)/1000;
+        for(let i = 0; (i < this.squares.length); i++)
+        {   this.squares[i].translate(dx, dy);
         }
-        this.angle += angle;
-        this.translate(center.x, center.y);
     }
-
-
-    
-
-
-
-
-
 }

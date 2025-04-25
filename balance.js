@@ -6,7 +6,6 @@ class Balance
         this.angle = 0;
         this.massCenter;
         this.torqueTotal = 0;
-        this.points = [new Point(this.x-this.radius, this.y), new Point(this.x+this.radius, this.y)];
     }
     draw()
     {   context.fillStyle = "Cyan";
@@ -14,14 +13,6 @@ class Balance
         context.arc(this.x, this.y, this.radius, 0+(Math.PI/180*this.angle), Math.PI+(Math.PI/180*this.angle), 0)
         context.closePath();
         context.fill();
-
-        context.fillStyle = "red";
-        context.beginPath();
-        context.arc(this.points[0].x, this.points[0].y, 5, 0, Math.PI*2, 0);
-        context.arc(this.points[1].x, this.points[1].y, 5, 0, Math.PI*2, 0);
-        context.closePath();
-        context.fill();
-        
     }
     update()
     {   this.centerMass();
@@ -42,16 +33,6 @@ class Balance
                     {   this.angle += this.torqueTotal/20;
                     }
                 }
-            }
-            if(this.angle != this.points[0].angle)
-            {   let center = {x: this.x, y: this.y};
-                for(let i = 0; (i < this.points.length); i++)
-                {   this.points[i].translate(-center.x, -center.y);
-                    //this.points[i].rotate(this.angle+(this.points[i].angle*(i*2-1)));
-                    this.points[i].rotate(i==0 ? this.angle-this.points[0].angle : this.angle+this.points[0].angle)
-                    console.log(i*2-1, this.points[i].angle*(i*2-1), this.angle)
-                    this.points[i].translate(center.x, center.y);
-                }   
             }
         }
         else
@@ -76,8 +57,5 @@ class Balance
         }
         this.massCenter = this.torqueTotal;
     }
-
-
-    
     
 }

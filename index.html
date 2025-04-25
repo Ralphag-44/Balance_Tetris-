@@ -31,6 +31,15 @@
       let timer = setInterval(loop, 1000 / FPS);
       let gravity = 0.3269;
       let pieces = [];
+      
+      let grid = [];
+      for (let i = 0; i <= 21; i++) {
+        grid.push([]);
+        for(let j = 0; (j < 20); j++){
+          grid[i].push(0);
+        }
+      }
+      
       squareP = canvas.width / 20;
       let balance = new Balance();
       pieces.push(new Piece(0));
@@ -63,10 +72,12 @@
         // }
         // context.closePath();
         // context.stroke();
+
         for (let i = 0; i < pieces.length; i++) {
-          pieces[i].update();
+          // pieces[i].update();
           pieces[i].draw();
         }
+
         movs();
         context.strokeStyle = "black";
         context.beginPath();
@@ -79,7 +90,6 @@
             context.lineTo(i, canvas.height);
         }
         context.closePath();
-        
         context.stroke();
         balance.draw();
         balance.update();
@@ -89,13 +99,13 @@
         movTimer += movTimer < 4;
         if (movTimer == 4) {
           if ((keys[65] || keys[37]) && pieces[pieces.length - 1].x > 0)
-          { pieces[pieces.length - 1].translate(-squareP, 0);
+          { let t = pieces[pieces.length - 1].x;
+            pieces[pieces.length - 1].translate(-squareP, 0);
             movTimer = 0;
-            console.log(pieces[pieces.length - 1].x)
           } 
           else 
           { if ((keys[68] || keys[39]) && pieces[pieces.length - 1].x + pieces[pieces.length - 1].width < canvas.width) 
-            {   pieces[pieces.length - 1].translate(squareP, 0);
+            { pieces[pieces.length - 1].translate(squareP, 0);
                 movTimer = 0;
             }
           }
