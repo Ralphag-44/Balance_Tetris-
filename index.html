@@ -31,16 +31,17 @@
       let timer = setInterval(loop, 1000 / FPS);
       let gravity = 0.3269;
       let pieces = [];
-      
+      let gridS = 19;
+
       let grid = [];
       for (let i = 0; i <= 21; i++) {
         grid.push([]);
-        for(let j = 0; (j < 20); j++){
+        for(let j = 0; (j < gridS); j++){
           grid[i].push(0);
         }
       }
       
-      squareP = canvas.width / 20;
+      squareP = canvas.width / gridS;
       let balance = new Balance();
       pieces.push(new Piece(0));
       // pieces.push(new Piece(0));

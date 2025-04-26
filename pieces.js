@@ -4,6 +4,7 @@ class Square{
         this.x = x;
         this.y = y;
         this.size = squareP;
+        this.mass = 1;
     }
     draw(color)
     {   context.fillStyle = color;
@@ -17,8 +18,9 @@ class Square{
 
 class Piece{
     constructor(type)
-    {   this.x = Math.round(squareP*9000)/1000;
+    {   this.x = Math.round(squareP*8000)/1000;
         this.y = 0;
+        this.state = 1;
         switch(type)
         {   case 0:
                 this.squares = [new Square(this.x, this.y), new Square(this.x+squareP, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
@@ -27,7 +29,10 @@ class Piece{
                 grid[grid.length-1][9] = grid[grid.length-1][10] = grid[grid.length-2][9] = grid[grid.length-2][10] = 1;
             break;
             case 1:
-
+                this.squares = [new Square(this.x, this.y), new Square(this.x+squareP, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
+                this.color = "yellow";
+                this.width = squareP*2;
+                grid[grid.length-1][9] = grid[grid.length-1][10] = grid[grid.length-2][9] = grid[grid.length-2][10] = 1;
             break;
             case 2:
 
