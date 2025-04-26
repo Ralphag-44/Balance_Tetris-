@@ -53,7 +53,7 @@ class Balance
             if(pieces[i].state)
             {   let totalMass = 0;
                 for(let j = 0; (j < pieces[i].squares.length); j++)
-                {   let distance = Math.ceil((pieces[i].squares[j].x + pieces[i].squares[j].size/2) / (canvas.width / gridS)) - (gridS/2);
+                {   let distance = Math.ceil((pieces[i].squares[j].x + pieces[i].squares[j].size/2) / (canvas.width / gridS)) - Math.ceil(gridS/2);
                     totalMass += pieces[i].squares[j].mass * distance  * gravity;
                 }
                 this.torqueTotal += totalMass;

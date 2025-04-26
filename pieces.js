@@ -18,27 +18,59 @@ class Square{
 
 class Piece{
     constructor(type)
-    {   this.x = Math.round(squareP*8000)/1000;
-        this.y = 0;
+    {   this.y = 0;
         this.state = 1;
+        this.x = Math.round(squareP*9000)/1000;
         switch(type)
         {   case 0:
+                this.x = Math.round(squareP*8000)/1000; 
                 this.squares = [new Square(this.x, this.y), new Square(this.x+squareP, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
                 this.color = "yellow";
                 this.width = squareP*2;
-                grid[grid.length-1][9] = grid[grid.length-1][10] = grid[grid.length-2][9] = grid[grid.length-2][10] = 1;
+                this.height = squareP*2;
+                grid[grid.length-1][8] = grid[grid.length-1][9] = grid[grid.length-2][8] = grid[grid.length-2][9] = 1;
             break;
             case 1:
-                this.squares = [new Square(this.x, this.y), new Square(this.x+squareP, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
-                this.color = "yellow";
-                this.width = squareP*2;
-                grid[grid.length-1][9] = grid[grid.length-1][10] = grid[grid.length-2][9] = grid[grid.length-2][10] = 1;
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x, this.y+squareP*2), new Square(this.x, this.y+squareP*3)];
+                this.color = "cyan";
+                this.width = squareP;
+                this.height = squareP*4;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-3][9] = grid[grid.length-4][9] = 1;
             break;
             case 2:
-
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x, this.y+squareP*2), new Square(this.x+squareP, this.y+squareP*2)];
+                this.color = "orange";
+                this.width = squareP*2;
+                this.height = squareP*3;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-3][9] = grid[grid.length-3][10] = 1;
             break;
             case 3:
-
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x, this.y+squareP*2), new Square(this.x-squareP, this.y+squareP*2)];
+                this.color = "blue";
+                this.width = squareP*2;
+                this.height = squareP*3;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-3][9] = grid[grid.length-3][8] = 1;
+            break;
+            case 4:
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x-squareP, this.y+squareP), new Square(this.x+squareP, this.y+squareP)];
+                this.color = "purple";
+                this.width = squareP*3;
+                this.height = squareP*2;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-2][8] = grid[grid.length-2][10] = 1;
+            break;
+            case 5:
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x-squareP, this.y+squareP), new Square(this.x+squareP, this.y)];
+                this.color = "green";
+                this.width = squareP*3;
+                this.height = squareP*2;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-2][8] = grid[grid.length-1][10] = 1;
+            break;
+            case 6:
+                this.squares = [new Square(this.x, this.y), new Square(this.x, this.y+squareP), new Square(this.x+squareP, this.y+squareP), new Square(this.x-squareP, this.y)];
+                this.color = "red";
+                this.width = squareP*3;
+                this.height = squareP*2;
+                grid[grid.length-1][9] = grid[grid.length-2][9] = grid[grid.length-2][10] = grid[grid.length-1][8] = 1;
             break;
         }
     }
